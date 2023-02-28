@@ -178,10 +178,4 @@ class TestLayerReport:
         assert res.json()['data'] == eval(DATA[11][5])
         assert res.status_code == DATA[11][4]
 
-    def test_health(self, test_login):
-        u = ServerInfo.get_url('/tenant/user/notify/newest')
-        h = {'x-token': test_login}
-        # print(u)
-        res = requests.get(url=u, headers=h)
-        print(res.text)
 

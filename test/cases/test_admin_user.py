@@ -10,8 +10,6 @@ DATA = ExcelTools.read_excel(f'{data_path}/用例数据.xls', '用户管理', sk
 # with open(r'C:\Users\zj_001\PycharmProjects\system\data\test_tenant.yaml', 'r', encoding='utf-8') as f:
 #     data = yaml.safe_load(f)
 
-
-
 class TestUser:
     """
     用户管理

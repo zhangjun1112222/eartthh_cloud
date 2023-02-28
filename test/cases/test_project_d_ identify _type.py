@@ -41,6 +41,7 @@ class TestIdentifyType:
         """
         识别结果类型新增
         """
+        c = random.randint(1000, 9999)
         a = self.test_project_tenant_list(test_login)
         u = ServerInfo.get_url(DATA[2][1])
         h = eval(DATA[2][2])
@@ -65,6 +66,7 @@ class TestIdentifyType:
         """
         识别结果类型修改
         """
+        c = random.randint(1000, 9999)
         a = self.test_identify_type_list(test_login)
         b = self.test_project_tenant_list(test_login)
         u = ServerInfo.get_url(eval(DATA[4][1]))
