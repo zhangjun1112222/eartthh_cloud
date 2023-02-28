@@ -7,10 +7,9 @@ from test.cases import case_path, data_path
 from utils.exceltools import ExcelTools
 DATA = ExcelTools.read_excel(f'{data_path}/用例数据.xls', '用户管理', skip_first=True)
 
-
 # with open(r'C:\Users\zj_001\PycharmProjects\system\data\test_tenant.yaml', 'r', encoding='utf-8') as f:
 #     data = yaml.safe_load(f)
- # print(data)
+
 
 
 class TestUser:

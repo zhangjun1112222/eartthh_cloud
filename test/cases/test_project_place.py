@@ -1,6 +1,3 @@
-import pytest
-import yaml
-import random
 
 from config.config import ServerInfo
 
