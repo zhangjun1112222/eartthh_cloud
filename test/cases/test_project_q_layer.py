@@ -134,7 +134,7 @@ class TestProjectLayer:
         assert res.status_code == DATA[8][4]
         return res.json()['data']['list'][-1]['id']
 
-    @pytest.mark.skip(reason='卡着转圈圈')
+    @pytest.mark.skip(reason='报错')
     def test_layer_rebuild(self, test_login):
         """
         重新生成功能
