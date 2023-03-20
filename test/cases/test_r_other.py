@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 from config.config import ServerInfo
@@ -11,6 +12,7 @@ class TestOther:
     """
     其他接口
     """
+    @allure.title('用户最新通知')
     def test_newest(self, test_login):
         """
         用户最新通知
@@ -21,6 +23,7 @@ class TestOther:
         assert res.status_code == DATA[0][4]
         assert res.json()['code'] == DATA[0][5]
 
+    @allure.title('健康检查')
     @pytest.mark.skip(reason='404')
     def test_health(self, test_login):
         """

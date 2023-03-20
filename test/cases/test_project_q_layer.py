@@ -1,7 +1,7 @@
 import pytest
 import yaml
 import random
-
+import allure
 from config.config import ServerInfo
 
 import requests
@@ -17,6 +17,7 @@ class TestProjectLayer:
     卫星历史图层
     """
 
+    @allure.title('图层分页查询 ')
     def test_layer_list(self, test_login):
         """
         图层分页查询
@@ -28,6 +29,7 @@ class TestProjectLayer:
         assert res.status_code == DATA[0][4]
         assert res.json()['code'] == DATA[0][5]
 
+    @allure.title('获取项目类型 ')
     def test_project_class(self, test_login):
         """
         获取项目类型
@@ -40,6 +42,7 @@ class TestProjectLayer:
         # print(res.json()['data'][-1]['id'])
         return res.json()['data'][-1]['id']
 
+    @allure.title('项目类型对应的项目 ')
     def test_project_class_project(self, test_login):
         """
         项目类型对应的项目
@@ -53,6 +56,7 @@ class TestProjectLayer:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('项目对应的项目场所 ')
     def test_project_project_place(self, test_login):
         """
         项目对应的项目场所
@@ -66,6 +70,7 @@ class TestProjectLayer:
         assert res.json()['code'] == DATA[3][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('图片上传 ')
     def test_picture_upload(self, test_login):
         """
         图片上传
@@ -79,6 +84,7 @@ class TestProjectLayer:
         assert res.json()['code'] == DATA[4][5]
         return res.json()['data']['id']
 
+    @allure.title('图层上传 ')
     def test_layer_upload(self, test_login):
         """
         图层上传
@@ -96,6 +102,7 @@ class TestProjectLayer:
         assert res.status_code == DATA[5][5]
         return res.json()['data']['id'], res.json()['data']['attachment_id'], res.json()['data']['geo_layer'], res.json()['data']['geo_workspace'], res.json()['data']['project_id'], res.json()['data']['project_place_id']
 
+    @allure.title('图层修改 ')
     def test_layer_update(self, test_login):
         """
         图层修改
@@ -112,6 +119,7 @@ class TestProjectLayer:
         assert res.json()['code'] == DATA[6][4]
         assert res.status_code == DATA[6][5]
 
+    @allure.title('图层删除 ')
     def test_layer_delete(self, test_login):
         """
         图层删除
@@ -123,6 +131,7 @@ class TestProjectLayer:
         assert res.status_code == DATA[7][4]
         assert res.json()['data'] == eval(DATA[7][5])
 
+    @allure.title('图层列表 ')
     def test_layer_list2(self, test_login):
         """
         图层列表
@@ -134,6 +143,7 @@ class TestProjectLayer:
         assert res.status_code == DATA[8][4]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('重新生成功能 ')
     @pytest.mark.skip(reason='报错')
     def test_layer_rebuild(self, test_login):
         """

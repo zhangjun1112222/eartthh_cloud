@@ -1,6 +1,5 @@
-
 from config.config import ServerInfo
-
+import allure
 import requests
 from test.cases import case_path, data_path
 from utils.exceltools import ExcelTools
@@ -13,6 +12,8 @@ class TestProjectPlace:
     """
     项目场所管理
     """
+
+    @allure.title('获取场所列表 ')
     def test_project_place_list(self, test_login):
         """
         获取场所列表
@@ -23,6 +24,7 @@ class TestProjectPlace:
         assert res.json()['code'] == DATA[0][4]
         assert res.status_code == DATA[0][5]
 
+    @allure.title('获取项目类型列表 ')
     def test_project_class_list(self, test_login):
         """
         获取项目类型列表
@@ -34,6 +36,7 @@ class TestProjectPlace:
         assert res.json()['code'] == DATA[1][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('项目类型获取对应的项目 ')
     def test_project_list(self, test_login):
         """
         项目类型获取对应的项目
@@ -48,6 +51,7 @@ class TestProjectPlace:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('新增项目场所 ')
     def test_place_add(self, test_login):
         """
         新增项目场所
@@ -63,6 +67,7 @@ class TestProjectPlace:
         assert res.json()['code'] == DATA[3][5]
         return res.json()['data']['id']
 
+    @allure.title('编辑项目场所 ')
     def test_place_update(self, test_login):
         """
         编辑项目场所
@@ -78,6 +83,7 @@ class TestProjectPlace:
         assert res.json()['code'] == DATA[4][4]
         assert res.status_code == DATA[4][5]
 
+    @allure.title('删除项目场所 ')
     def test_place_delete(self, test_login):
         """
         删除项目场所
@@ -89,6 +95,7 @@ class TestProjectPlace:
         assert res.status_code == DATA[5][4]
         assert res.json()['data'] == eval(DATA[5][5])
 
+    @allure.title('项目场所分页查询 ')
     def test_place_query(self, test_login):
         """
         项目场所分页查询

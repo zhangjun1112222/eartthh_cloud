@@ -1,7 +1,7 @@
 import pytest
 import yaml
 import random
-
+import allure
 from config.config import ServerInfo
 
 import requests
@@ -14,6 +14,7 @@ class TestUserGroup:
     用户组管理
     """
 
+    @allure.title('租户列表')
     def test_project_tenant(self, test_login):
         """
         租户列表
@@ -26,6 +27,7 @@ class TestUserGroup:
         # print(res.json()['data'][1]['name'])
         return res.json()['data'][-1]['id']
 
+    @allure.title('获取用户组列表')
     def test_user_group_list(self, test_login):
         """
         获取用户组列表
@@ -38,6 +40,7 @@ class TestUserGroup:
         assert res.json()['code'] == DATA[1][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('新增用户组')
     def test_user_group_add(self, test_login):
         """
         新增用户组
@@ -51,6 +54,7 @@ class TestUserGroup:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data']['id']
 
+    @allure.title('编辑用户组')
     def test_user_group_update(self, test_login):
         """
         编辑用户组
@@ -64,6 +68,7 @@ class TestUserGroup:
         assert res.status_code == DATA[3][4]
         assert res.json()['code'] == DATA[3][5]
 
+    @allure.title('删除用户组')
     def test_user_group_delete(self, test_login):
         """
         删除用户组
@@ -75,6 +80,7 @@ class TestUserGroup:
         assert res.status_code == DATA[4][4]
         assert res.json()['data'] == eval(DATA[4][5])
 
+    @allure.title('租户对应的用户数量')
     def test_tenant_to_user(self, test_login):
         """
         租户对应的用户数量
@@ -90,6 +96,7 @@ class TestUserGroup:
         assert res.json()['code'] == DATA[5][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('用户组对应的用户列表(展示)')
     def test_user_group_user_list(self, test_login):
         """
         用户组对应的用户列表(展示)
@@ -104,6 +111,7 @@ class TestUserGroup:
         assert res.json()['code'] == DATA[6][4]
         assert res.status_code == DATA[6][5]
 
+    @allure.title('用户组里添加用户')
     def test_user_group_user_add(self, test_login):  # 同时两次单独调试会报错 ，同一用户不能添加两次
         """
         用户组里添加用户
@@ -118,6 +126,7 @@ class TestUserGroup:
         assert res.status_code == DATA[7][4]
         assert res.json()['data']['user_id'] == eval(DATA[7][5])
 
+    @allure.title('用户组对应的用户列表(展示)')
     def test_user_group_user_list1(self, test_login):  # 前提是必须先运行’用户组里添加用户‘，list才有数据 否则return 没有下标会报错
         """
         用户组对应的用户列表(展示)
@@ -133,6 +142,7 @@ class TestUserGroup:
         assert res.status_code == DATA[8][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('用户组里删除用户')
     def test_user_group_user_delete(self, test_login):  # list有数据才能进行删除调试
         """
         用户组里删除用户
@@ -144,6 +154,7 @@ class TestUserGroup:
         assert res.status_code == DATA[9][4]
         assert res.json()['code'] == DATA[9][5]
 
+    @allure.title('用户组里重新添加用户')
     def test_user_group_user_add1(self, test_login):  # 同时两次单独调试会报错 ，同一用户不能添加两次
         """
         用户组里重新添加用户
@@ -158,6 +169,7 @@ class TestUserGroup:
         assert res.status_code == DATA[10][4]
         assert res.json()['data']['user_id'] == eval(DATA[10][5])
 
+    @allure.title('用户组里面对应的项目组（展示）')
     def test_user_group_project_group_list(self, test_login):
         """
         用户组里面对应的项目组（展示）
@@ -172,6 +184,7 @@ class TestUserGroup:
         assert res.status_code == DATA[11][4]
         assert res.json()['code'] == DATA[11][5]
 
+    @allure.title('租户对应的项目组')
     def test_tenant_to_project_group(self, test_login):
         """
         租户对应的项目组
@@ -187,6 +200,7 @@ class TestUserGroup:
         assert res.json()['code'] == DATA[12][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('用户组添加项目组')
     def test_user_group_project_group_add(self, test_login):  # 必须有对应的项目组，且不能单独调试两次
         """
         用户组添加项目组
@@ -201,6 +215,7 @@ class TestUserGroup:
         assert res.status_code == DATA[13][4]
         assert res.json()['code'] == DATA[13][5]
 
+    @allure.title('用户组里面对应的项目组（展示）')
     def test_user_group_project_group_list1(self, test_login):  # 前提是必须先运行’用户组添加项目组‘，list才有数据 否则return 没有下表会报错
         """
         用户组里面对应的项目组（展示）
@@ -216,6 +231,7 @@ class TestUserGroup:
         assert res.json()['code'] == DATA[14][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('用户组里删除项目组')
     def test_user_group_project_group_delete(self, test_login):  # 必须list有项目组，且不能单独调试两次
         """
         用户组里删除项目组
@@ -228,6 +244,7 @@ class TestUserGroup:
         assert res.status_code == DATA[15][4]
         assert res.json()['code'] == DATA[15][5]
 
+    @allure.title('用户组重新添加项目组')
     def test_user_group_project_group_add1(self, test_login):  # 必须有对应的项目组，且不能单独调试两次
         """
         用户组重新添加项目组

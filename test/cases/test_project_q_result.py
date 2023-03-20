@@ -1,5 +1,5 @@
 from config.config import ServerInfo
-
+import allure
 import requests
 from test.cases import case_path, data_path
 from utils.exceltools import ExcelTools
@@ -10,6 +10,7 @@ class TestIdentifyResult:
     识别结果管理
     """
 
+    @allure.title('识别结果分页查询 ')
     def test_result_query(self, test_login):
         """
         识别结果分页查询
@@ -21,6 +22,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[0][4]
         assert res.status_code == DATA[0][5]
 
+    @allure.title('获取项目类型 ')
     def test_project_class_list(self, test_login):
         """
         获取项目类型
@@ -32,6 +34,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[1][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('获取结果类型 ')
     def test_result_type(self, test_login):
         """
         获取结果类型
@@ -43,6 +46,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data'][0]['type'], res.json()['data'][1]['type']   # 高度 / 常规
 
+    @allure.title('获取类型名 ')
     def test_type_name(self, test_login):
         """
         获取类型名
@@ -55,6 +59,7 @@ class TestIdentifyResult:
         # print(res.json())
         return res.json()['data'][-1]['type_name'], res.json()['data'][-2]['type_name']  # 最后2个类型名不能同名
 
+    @allure.title('获取识别单位 ')
     def test_identify_unit(self, test_login):
         """
         获取识别单位
@@ -67,6 +72,7 @@ class TestIdentifyResult:
         # print(res.json())
         return res.json()['data'][-1]['identify_unit']
 
+    @allure.title('项目类型对应的项目 ')
     def test_class_project(self, test_login):
         """
         项目类型对应的项目
@@ -81,6 +87,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[5][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('项目对应的场所 ')
     def test_project_to_place(self, test_login):
         """
         项目对应的场所
@@ -95,6 +102,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[6][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('场所对应的图层 ')
     def test_place_to_layer(self, test_login):
         """
         场所对应的图层
@@ -109,6 +117,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[7][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('上传文件 ')
     def test_result_upload(self, test_login):
         """
         上传文件
@@ -122,6 +131,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[8][5]
         return res.json()['data']['id']
 
+    @allure.title('识别结果新增 ')
     def test_result_add(self, test_login):
         """
         识别结果新增
@@ -142,6 +152,7 @@ class TestIdentifyResult:
         assert res.status_code == DATA[9][4]
         assert res.json()['code'] == DATA[9][5]
 
+    @allure.title('识别结果列表 ')
     def test_result_list(self, test_login):
         """
         识别结果列表
@@ -153,6 +164,7 @@ class TestIdentifyResult:
         assert res.json()['code'] == DATA[10][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('识别结果修改 ')
     def test_result_update(self, test_login):
         """
         识别结果修改
@@ -173,6 +185,7 @@ class TestIdentifyResult:
         assert res.status_code == DATA[11][4]
         assert res.json()['code'] == DATA[11][5]
 
+    @allure.title('识别结果新增 ')
     def test_result_add2(self, test_login):   # 再次新增获取最后2个类型名不能相同，否则报错
         """
         识别结果新增
@@ -193,6 +206,7 @@ class TestIdentifyResult:
         assert res.status_code == DATA[12][4]
         assert res.json()['code'] == DATA[12][5]
 
+    @allure.title('识别结果删除 ')
     def test_result_delete(self, test_login):
         """
         识别结果删除

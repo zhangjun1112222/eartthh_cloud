@@ -1,5 +1,5 @@
 from config.config import ServerInfo
-
+import allure
 import requests
 from test.cases import case_path, data_path
 from utils.exceltools import ExcelTools
@@ -13,6 +13,7 @@ class TestOrder:
     订单管理
     """
 
+    @allure.title('大屏用户信息 ')
     def test_info(self, test_login2):
         """
         大屏用户信息
@@ -25,6 +26,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[0][5]
         return res.json()['data']['tenant_id']
 
+    @allure.title('项目类型获取 ')
     def test_project_type(self, test_login2):
         """
         项目类型获取
@@ -37,6 +39,7 @@ class TestOrder:
         # print(res.json())
         return res.json()['data'][0]['type'], res.json()['data'][1]['type']   # 风能/光伏/房地产
 
+    @allure.title('根据时间范围获取期数 ')
     def test_periods_daterange(self, test_login2):
         """
         根据时间范围获取期数
@@ -50,6 +53,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data']
 
+    @allure.title('大屏新建订单(含关联模块) ')
     def test_order_add(self, test_login2):
         """
         大屏新建订单(含关联模块)
@@ -66,6 +70,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[3][5]
         return res.json()['data']['id'], res.json()['data']['associated_list'][0]['id']
 
+    @allure.title('大屏创建订单（不含关联模块）')
     def test_order_add2(self, test_login2):
         """
         大屏创建订单（不含关联模块）
@@ -81,6 +86,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[4][5]
         return res.json()['data']['id']
 
+    @allure.title('新增关联模块（前提是订单里没有关联模块）')
     def test_order_associated_add(self, test_login2):
         """
         新增关联模块（前提是订单里没有关联模块）
@@ -93,6 +99,7 @@ class TestOrder:
         assert res.status_code == DATA[5][4]
         assert res.json()['code'] == DATA[5][5]
 
+    @allure.title('大屏订单列表')
     def test_order_list(self, test_login2):
         """
         大屏订单列表
@@ -105,6 +112,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[6][5]
         return res.json()['data']['list'][0]['id']
 
+    @allure.title('订单详情获取')
     def test_order_detail(self, test_login2):
         """
         订单详情获取
@@ -118,6 +126,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[7][5]
         return res.json()['data']['associated_list'][0]['id']
 
+    @allure.title('订单基本信息修改')
     def test_order_update(self, test_login2):
         """
          订单基本信息修改
@@ -132,6 +141,7 @@ class TestOrder:
         assert res.status_code == DATA[8][4]
         assert res.json()['code'] == DATA[8][5]
 
+    @allure.title('订单关联模块修改')
     def test_order_associated_update(self, test_login2):
         """
         订单关联模块修改
@@ -148,6 +158,7 @@ class TestOrder:
         assert res.status_code == DATA[9][4]
         assert res.json()['code'] == DATA[9][5]
 
+    @allure.title('订单关联模块删除')
     def test_order_associated_delete(self, test_login2):
         """
         订单关联模块删除
@@ -159,6 +170,7 @@ class TestOrder:
         assert res.status_code == DATA[10][4]
         assert res.json()['data'] == eval(DATA[10][5])
 
+    @allure.title('订单提交')
     def test_order_put(self, test_login2):
         """
         订单提交
@@ -171,6 +183,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[11][5]
         return a
 
+    @allure.title('订单取消提交')
     def test_order_cancel_put(self, test_login2):
         """
         订单取消提交
@@ -182,6 +195,7 @@ class TestOrder:
         assert res.status_code == DATA[12][4]
         assert res.json()['code'] == DATA[12][5]
 
+    @allure.title('订单再次提交')
     def test_order_put1(self, test_login2):
         """
         订单再次提交
@@ -193,6 +207,7 @@ class TestOrder:
         assert res.status_code == DATA[13][4]
         assert res.json()['code'] == DATA[13][5]
 
+    @allure.title('后台订单列表')
     def test_order_list2(self, test_login):
         """
         后台订单列表
@@ -204,6 +219,7 @@ class TestOrder:
         assert res.status_code == DATA[14][4]
         return res.json()['data']['list'][0]['id']
 
+    @allure.title('订单日志查看')
     def test_order_log(self, test_login):
         """
         订单日志查看
@@ -217,6 +233,7 @@ class TestOrder:
         assert res.status_code == DATA[15][4]
         assert res.json()['code'] == DATA[15][5]
 
+    @allure.title('编辑里的类型获取')
     def test_order_type(self, test_login):
         """
         编辑里的类型获取
@@ -227,6 +244,7 @@ class TestOrder:
         assert res.status_code == DATA[16][4]
         assert res.json()['code'] == DATA[16][5]
 
+    @allure.title('后台订单详情')
     def test_order_detail2(self, test_login):
         """
         后台订单详情
@@ -238,6 +256,7 @@ class TestOrder:
         assert res.status_code == DATA[17][4]
         assert res.json()['code'] == DATA[17][5]
 
+    @allure.title('后台订单列表获取')
     def test_order_list3(self, test_login):
         """
         后台订单列表获取(获取apply_state:1的第一条数据id)
@@ -255,6 +274,7 @@ class TestOrder:
         assert res.json()['code'] == DATA[18][5]
         return item['id']
 
+    @allure.title('后台订单增加关联地块')
     def test_order_area_add(self, test_login):
         """
         后台订单增加关联地块
@@ -269,6 +289,7 @@ class TestOrder:
         assert res.status_code == DATA[19][4]
         assert res.json()['code'] == DATA[19][5]
 
+    @allure.title('审核拒绝')
     def test_order_refuse(self, test_login):
         """
         审核拒绝
@@ -282,6 +303,7 @@ class TestOrder:
         assert res.status_code == DATA[20][4]
         assert res.json()['code'] == DATA[20][5]
 
+    @allure.title('审核通过')
     def test_order_pass(self, test_login):
         """
         审核通过

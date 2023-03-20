@@ -57,6 +57,7 @@ class TestUser:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data']['id']
 
+    @allure.title('编辑用户')
     def test_user_update(self, test_login):
         """
         编辑用户
@@ -73,6 +74,7 @@ class TestUser:
         assert res.status_code == DATA[3][4]
         assert res.json()['code'] == DATA[3][5]
 
+    @allure.title('用户列表')
     def test_user_list(self, test_login):
         """
         用户列表
@@ -85,6 +87,7 @@ class TestUser:
         assert res.json()['code'] == DATA[4][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('删除用户')
     def test_user_delete(self, test_login):
         """
         删除用户
@@ -96,6 +99,7 @@ class TestUser:
         assert res.status_code == DATA[5][4]
         assert res.json()['data'] == eval(DATA[5][5])
 
+    @allure.title('新增角色')
     @pytest.mark.skip(reason='在角色里已运行用例')
     def test_role_add(self, test_login):
         """
@@ -109,6 +113,7 @@ class TestUser:
         assert res.status_code == DATA[6][4]
         assert res.json()['code'] == DATA[6][5]
 
+    @allure.title('用户对应的角色')
     def test_user_role_list(self, test_login):
         """
         用户对应的角色
@@ -124,6 +129,7 @@ class TestUser:
         assert res.status_code == DATA[7][4]
         return res.json()['data']['list'][0]['id'], res.json()['data']['list'][1]['id']
 
+    @allure.title('用户添加角色(管理员)')
     def test_user_role_add(self, test_login):
         """
         用户添加角色(管理员)
@@ -139,6 +145,7 @@ class TestUser:
         assert res.status_code == DATA[8][4]
         return res.json()['data']['id']
 
+    @allure.title('用户添加角色（普通用户）')
     def test_user_role_add1(self, test_login):
         """
         用户添加角色（普通用户）
@@ -154,6 +161,7 @@ class TestUser:
         assert res.status_code == DATA[9][4]
         return res.json()['data']['id']
 
+    @allure.title('已用的用户角色列表（展示）')
     def test_user_role_list1(self, test_login):
         """
         已用的用户角色列表（展示）
@@ -169,6 +177,7 @@ class TestUser:
         assert res.status_code == DATA[10][4]
         return res.json()['data']['list'][0]['id']
 
+    @allure.title('用户删除角色')
     def test_user_role_delete(self, test_login):
         """
         用户删除角色

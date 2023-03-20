@@ -1,4 +1,4 @@
-
+import allure
 
 from config.config import ServerInfo
 
@@ -16,6 +16,7 @@ class TestProjectGroup:
     项目组管理
     """
 
+    @allure.title('租户列表')
     def test_project_tenant_list(self, test_login):
         """
         租户列表
@@ -28,6 +29,7 @@ class TestProjectGroup:
         # print(res.json()['data'][1]['name'])
         return res.json()['data'][-1]['id']
 
+    @allure.title('新增项目组')
     def test_project_group_add(self, test_login):
         """
         新增项目组
@@ -42,6 +44,7 @@ class TestProjectGroup:
         assert res.json()['code'] == DATA[1][5]
         return res.json()['data']['id']
 
+    @allure.title('修改项目组')
     def test_project_group_update(self, test_login):
         """
         修改项目组
@@ -56,6 +59,7 @@ class TestProjectGroup:
         assert res.status_code == DATA[2][4]
         assert res.json()['code'] == DATA[2][5]
 
+    @allure.title('获取项目组列表')
     def test_project_group_list(self, test_login):
         """
         获取项目组列表
@@ -68,6 +72,7 @@ class TestProjectGroup:
         # print(res.json()['data']['list'][-1]['id'])
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('删除项目组')
     def test_project_group_delete(self, test_login):
         """
         删除项目组
@@ -79,6 +84,7 @@ class TestProjectGroup:
         assert res.status_code == DATA[4][4]
         assert res.json()['code'] == DATA[4][5]
 
+    @allure.title('租户对应的所有项目')
     def test_tenant_project_list(self, test_login):
         """
         租户对应的所有项目
@@ -94,6 +100,7 @@ class TestProjectGroup:
         assert res.json()['code'] == DATA[5][5]
         return res.json()['data']['list'][-1]['id']  # 返回的项目id
 
+    @allure.title('项目组里添加项目')
     def test_group_project_add(self, test_login):  # 只能单独调试一次
         """
         项目组里添加项目
@@ -111,6 +118,7 @@ class TestProjectGroup:
         assert res.json()['code'] == DATA[6][5]
         # return res.json()['data']['id']
 
+    @allure.title('项目组里面项目列表(展示) ')
     def test_group_project_list(self, test_login):
         """
         项目组里面项目列表(展示) # 必须先运行 test_group_project_add，不然单独运行没有数据 list为空不能取下标
@@ -126,6 +134,7 @@ class TestProjectGroup:
         assert res.json()['code'] == DATA[7][5]
         return res.json()['data']['list'][0]['id']
 
+    @allure.title('项目组里删除项目 ')
     def test_group_project_delete(self, test_login):
         """
         项目组里删除项目 # 必须新增过后才能进行删除，单独运行没有参数会报错
@@ -139,6 +148,7 @@ class TestProjectGroup:
         assert res.json()['code'] == DATA[8][4]
         assert res.status_code == DATA[8][5]
 
+    @allure.title('项目组里重新添加项目 ')
     def test_group_project_add1(self, test_login):  # 只能单独调试一次
         """
         项目组里重新添加项目

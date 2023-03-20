@@ -1,5 +1,6 @@
 import pytest
 import yaml
+import allure
 import requests
 from config.config import ServerInfo
 from test.cases import case_path, data_path
@@ -14,6 +15,7 @@ class TestLayerReport:
     图层报告
     """
 
+    @allure.title('图层报告分页查询 ')
     def test_report_query(self, test_login):
         """
         图层报告分页查询
@@ -25,6 +27,7 @@ class TestLayerReport:
         assert res.json()['code'] == DATA[0][4]
         assert res.status_code == DATA[0][5]
 
+    @allure.title('获取项目类型 ')
     def test_project_class(self, test_login):
         """
         获取项目类型
@@ -37,6 +40,7 @@ class TestLayerReport:
         # print(res.json()['data'][-1]['id'])
         return res.json()['data'][-1]['id']
 
+    @allure.title('项目类型对应的项目 ')
     def test_project_class_project(self, test_login):
         """
         项目类型对应的项目
@@ -50,6 +54,7 @@ class TestLayerReport:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('项目对应的项目场所 ')
     def test_project_project_place(self, test_login):
         """
         项目对应的项目场所
@@ -63,6 +68,7 @@ class TestLayerReport:
         assert res.json()['code'] == DATA[3][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('场所对应的图层 ')
     def test_project_place_layer(self, test_login):
         """
         场所对应的图层
@@ -77,6 +83,7 @@ class TestLayerReport:
         assert res.json()['code'] == DATA[4][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('文件上传(word) ')
     def test_report_files_upload(self, test_login):
         """
         文件上传(word)
@@ -90,6 +97,7 @@ class TestLayerReport:
         assert res.json()['data']['filename'] == DATA[5][5]
         return res.json()['data']['id']
 
+    @allure.title('文件上传(pdf) ')
     def test_report_files_upload2(self, test_login):
         """
         文件上传(pdf)
@@ -103,6 +111,7 @@ class TestLayerReport:
         assert res.json()['data']['filename'] == DATA[6][5]
         return res.json()['data']['id']
 
+    @allure.title('添加报告(下载/word)')
     def test_report_add(self, test_login):
         """
         添加报告(下载/word)
@@ -120,6 +129,7 @@ class TestLayerReport:
         assert res.status_code == DATA[7][4]
         assert res.json()['code'] == DATA[7][5]
 
+    @allure.title('添加报告(预览/pdf)')
     def test_report_add2(self, test_login):
         """
         添加报告(预览/pdf)
@@ -138,6 +148,7 @@ class TestLayerReport:
         assert res.json()['code'] == DATA[8][5]
         return res.json()['data']['id']
 
+    @allure.title('报告列表')
     def test_report_list(self, test_login):
         """
         报告列表
@@ -149,6 +160,7 @@ class TestLayerReport:
         assert res.status_code == DATA[9][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('修改报告')
     def test_report_update(self, test_login):
         """
         修改报告
@@ -167,6 +179,7 @@ class TestLayerReport:
         assert res.status_code == DATA[10][4]
         assert res.json()['code'] == DATA[10][5]
 
+    @allure.title('删除报告')
     def test_report_delete(self, test_login):
         """
         删除报告
