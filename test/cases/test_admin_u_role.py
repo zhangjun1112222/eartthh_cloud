@@ -1,3 +1,4 @@
+import allure
 import pytest
 import yaml
 import requests
@@ -14,6 +15,7 @@ class TestRole:
     角色管理
     """
 
+    @allure.title('租户列表')
     def test_user_tenant(self, test_login):
         """
         租户列表
@@ -25,6 +27,7 @@ class TestRole:
         assert res.status_code == DATA[0][4]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('获取角色类型')
     def test_role_class(self, test_login):
         """
         获取角色类型
@@ -37,6 +40,7 @@ class TestRole:
         assert res.status_code == DATA[1][4]
         return res.json()['data'][0]['type'], res.json()['data'][1]['type']
 
+    @allure.title('新增角色（管理员）')
     def test_role_add(self, test_login):
         """
         新增角色（管理员）
@@ -51,6 +55,7 @@ class TestRole:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data']['id']
 
+    @allure.title('新增角色（普通用户）')
     def test_role_add1(self, test_login):
         """
         新增角色（普通用户）
@@ -64,6 +69,7 @@ class TestRole:
         assert res.status_code == DATA[3][4]
         assert res.json()['code'] == DATA[3][5]
 
+    @allure.title('编辑角色')
     def test_role_update(self, test_login):
         """
         编辑角色
@@ -79,6 +85,7 @@ class TestRole:
         assert res.status_code == DATA[4][4]
         assert res.json()['code'] == DATA[4][5]
 
+    @allure.title('获取角色列表')
     def test_role_list(self, test_login):
         """
         获取角色列表
@@ -91,6 +98,7 @@ class TestRole:
         assert res.json()['code'] == DATA[5][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('删除角色')
     def test_role_delete(self, test_login):
         """
         删除角色
@@ -102,6 +110,7 @@ class TestRole:
         assert res.status_code == DATA[6][4]
         assert res.json()['code'] == DATA[6][5]
 
+    @allure.title('分页查询')
     def test_role_query(self, test_login):
         """
         分页查询

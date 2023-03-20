@@ -1,6 +1,7 @@
 import pytest
 import yaml
 import random
+import allure
 from config.config import ServerInfo
 import requests
 from test.cases import case_path, data_path
@@ -15,6 +16,8 @@ class TestProject:
     """
     项目管理
     """
+
+    @allure.title('租户列表')
     def test_project_tenant_list(self, test_login):
         """
         租户列表
@@ -27,6 +30,7 @@ class TestProject:
         # print(res.json()['data'][1]['name'])
         return res.json()['data'][-1]['id']
 
+    @allure.title('租户对应的行业类型')
     def test_project_industry_class(self, test_login):
         """
         租户对应的行业类型
@@ -41,6 +45,7 @@ class TestProject:
         assert res.json()['code'] == DATA[1][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('获取项目类型')
     def test_project_class(self, test_login):
         """
         获取项目类型
@@ -53,6 +58,7 @@ class TestProject:
         assert res.json()['code'] == DATA[2][5]
         return res.json()['data'][0]['type']
 
+    @allure.title('新增项目')
     def test_project_add(self, test_login):
         """
         新增项目
@@ -69,6 +75,7 @@ class TestProject:
         assert res.json()['code'] == DATA[3][5]
         return res.json()['data']['id']
 
+    @allure.title('获取项目列表')
     def test_project_list(self, test_login):
         """
         获取项目列表
@@ -80,6 +87,7 @@ class TestProject:
         assert res.json()['code'] == DATA[4][5]
         return res.json()['data']['list'][-1]['id'], res.json()['data']['list'][-1]['geo_workspace']
 
+    @allure.title('修改项目')
     def test_project_update(self, test_login):
         """
         修改项目
@@ -95,6 +103,7 @@ class TestProject:
         assert res.status_code == DATA[5][4]
         assert res.json()['code'] == DATA[5][5]
 
+    @allure.title('删除项目')
     def test_project_delete(self, test_login):
         """
         删除项目
@@ -107,6 +116,7 @@ class TestProject:
         assert res.status_code == DATA[6][4]
         assert res.json()['code'] == DATA[6][5]
 
+    @allure.title('分页查询')
     def test_project_query(self, test_login):
         """
         分页查询
@@ -120,6 +130,7 @@ class TestProject:
         assert res.json()['code'] == DATA[7][4]
         assert res.status_code == DATA[7][5]
 
+    @allure.title('识别结果类型名获取')
     def test_identify_type_list(self, test_login):
         """
         识别结果类型名获取
@@ -131,6 +142,7 @@ class TestProject:
         assert res.json()['code'] == DATA[8][5]
         return res.json()['data'][-1]['type_name'], res.json()['data'][-2]['type_name']
 
+    @allure.title('建设目标新增')
     def test_project_build_add(self, test_login):
         """
         建设目标新增
@@ -147,6 +159,7 @@ class TestProject:
         assert res.json()['code'] == DATA[9][5]
         # return res.json()['data']['id']
 
+    @allure.title('项目建设目标列表')
     def test_project_build_list(self, test_login):  # 必须列表中有数据才能单独运行，或在新增过后运行，不然下标会报错
         """
         项目建设目标列表
@@ -162,6 +175,7 @@ class TestProject:
         assert res.json()['code'] == DATA[10][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('项目建设修改')
     def test_project_build_update(self, test_login):  #list里必须有数据，才能单独运行
         """
         项目建设修改
@@ -178,6 +192,7 @@ class TestProject:
         assert res.status_code == DATA[11][4]
         assert res.json()['data']['target'] == eval(DATA[11][5])
 
+    @allure.title('建设目标新增1')
     def test_project_build_add2(self, test_login):
         """
         建设目标新增1
@@ -193,6 +208,7 @@ class TestProject:
         assert res.status_code == DATA[12][4]
         assert res.json()['code'] == DATA[12][5]
 
+    @allure.title('项目建设删除')
     def test_project_build_delete(self, test_login):
         """
         项目建设删除
@@ -204,6 +220,7 @@ class TestProject:
         assert res.status_code == DATA[13][4]
         assert res.json()['data'] == eval(DATA[13][5])
 
+    @allure.title('项目建设目标查询')
     def test_project_build_query(self, test_login):  # 必须列表中有数据才能单独运行，或在新增过后运行，不然下标会报错
         """
         项目建设目标查询

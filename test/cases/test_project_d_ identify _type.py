@@ -1,3 +1,4 @@
+import allure
 import pytest
 import yaml
 import random
@@ -13,6 +14,7 @@ class TestIdentifyType:
     识别结果类型
     """
 
+    @allure.title('租户列表')
     def test_project_tenant_list(self, test_login):
         """
         租户列表
@@ -25,6 +27,7 @@ class TestIdentifyType:
         # print(res.json()['data'][1]['name'])
         return res.json()['data'][-1]['id']
 
+    @allure.title('结果类型分页查询')
     def test_identify_type_query(self, test_login):
         """
         结果类型分页查询
@@ -37,6 +40,7 @@ class TestIdentifyType:
         assert res.status_code == DATA[1][4]
         assert res.json()['code'] == DATA[1][5]
 
+    @allure.title('识别结果类型新增')
     def test_identify_type_add(self, test_login):
         """
         识别结果类型新增
@@ -50,6 +54,7 @@ class TestIdentifyType:
         assert res.status_code == DATA[2][4]
         assert res.json()['code'] == DATA[2][5]
 
+    @allure.title('识别结果类型列表')
     def test_identify_type_list(self, test_login):
         """
         识别结果类型列表
@@ -62,6 +67,7 @@ class TestIdentifyType:
         assert res.json()['code'] == DATA[3][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('识别结果类型修改')
     def test_identify_type_update(self, test_login):
         """
         识别结果类型修改
@@ -76,6 +82,7 @@ class TestIdentifyType:
         assert res.status_code == DATA[4][4]
         assert res.json()['code'] == DATA[4][5]
 
+    @allure.title('识别结果类型新增2')
     def test_identify_type_add2(self, test_login):
         """
         识别结果类型新增2
@@ -88,6 +95,7 @@ class TestIdentifyType:
         assert res.status_code == DATA[5][4]
         assert res.json()['code'] == DATA[5][5]
 
+    @allure.title('识别结果类型删除')
     def test_identify_type_delete(self, test_login):
         """
         识别结果类型删除

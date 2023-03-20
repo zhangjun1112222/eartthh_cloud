@@ -1,3 +1,4 @@
+import allure
 import pytest
 import yaml
 import random
@@ -15,6 +16,7 @@ class TestUser:
     用户管理
     """
 
+    @allure.title('租户列表')
     def test_user_tenant(self, test_login):
         """
         租户列表
@@ -26,6 +28,7 @@ class TestUser:
         assert res.status_code == DATA[0][4]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('分页查询')
     def test_user_querylist(self, test_login):
         """
         分页查询
@@ -37,6 +40,7 @@ class TestUser:
         assert res.status_code == DATA[1][4]
         assert res.json()['code'] == DATA[1][5]
 
+    @allure.title('新增用户')
     def test_user_add(self, test_login):
         """
         新增用户

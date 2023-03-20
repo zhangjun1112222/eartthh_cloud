@@ -1,5 +1,5 @@
 from config.config import ServerInfo
-
+import allure
 import requests
 from test.cases import case_path, data_path
 from utils.exceltools import ExcelTools
@@ -10,6 +10,8 @@ class TestProjectClass:
     """
     项目类型管理
     """
+
+    @allure.title('租户列表')
     def test_tenant(self, test_login):
         """
         租户列表
@@ -21,6 +23,7 @@ class TestProjectClass:
         assert res.json()['code'] == DATA[0][5]
         return res.json()['data'][-1]['id']
 
+    @allure.title('新增项目类型')
     def test_project_class_add(self, test_login):
         """
         新增项目类型
@@ -35,6 +38,7 @@ class TestProjectClass:
         assert res.json()['code'] == DATA[1][5]
         return res.json()['data']['id']
 
+    @allure.title('项目类型分页获取')
     def test_project_class_list(self, test_login):
         """
         项目类型分页获取
@@ -46,6 +50,7 @@ class TestProjectClass:
         assert res.status_code == DATA[2][4]
         assert res.json()['code'] == DATA[2][5]
 
+    @allure.title('项目类型分页查询获取')
     def test_project_class_query(self, test_login):
         """
         项目类型分页查询获取
@@ -60,6 +65,7 @@ class TestProjectClass:
         assert res.status_code == DATA[3][4]
         assert res.json()['code'] == DATA[3][5]
 
+    @allure.title('修改项目类型')
     def test_project_class_update(self,test_login):
         """
         修改项目类型
@@ -73,6 +79,7 @@ class TestProjectClass:
         assert res.status_code == DATA[4][4]
         assert res.json()['data']['name'] == DATA[4][5]
 
+    @allure.title('删除项目类型')
     def test_project_class_delete(self, test_login):
         """
         删除项目类型

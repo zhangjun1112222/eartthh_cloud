@@ -1,3 +1,4 @@
+import allure
 import pytest
 import yaml
 
@@ -18,6 +19,7 @@ class TestTenant:
     租户管理
     """
 
+    @allure.title('新增租户')
     @pytest.mark.parametrize("name,probation,probation_begin,probation_end,system_name", data['新增租户数据'])
     def test_tenant_add(self, test_login, name, probation, probation_begin, probation_end, system_name):
         """
@@ -30,6 +32,7 @@ class TestTenant:
         assert res.json()['code'] == DATA[0][4]
         assert res.status_code == DATA[0][4]
 
+    @allure.title('分页查询')
     def test_tenant_querylist(self, test_login):
         """
         分页查询
@@ -41,6 +44,7 @@ class TestTenant:
         assert res.json()['code'] == DATA[1][4]
         assert res.status_code == DATA[1][5]
 
+    @allure.title('获取列表所有数据')
     def test_tenant_list(self, test_login):
         """
         获取列表所有数据
@@ -53,6 +57,7 @@ class TestTenant:
         assert res.status_code == DATA[2][5]
         return res.json()['data']['list'][-1]['id']
 
+    @allure.title('修改租户信息')
     def test_tenant_update(self, test_login):
         """
         修改租户信息
@@ -66,6 +71,7 @@ class TestTenant:
         assert res.json()['data']['name'] == eval(DATA[3][5])
         assert res.status_code == DATA[3][4]
 
+    @allure.title('删除租户')
     def test_tenant_delete(self, test_login):
         """
         删除租户

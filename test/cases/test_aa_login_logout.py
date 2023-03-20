@@ -1,3 +1,4 @@
+import allure
 import pytest
 import re
 from config.config import ServerInfo
@@ -16,7 +17,7 @@ class TestLoginLogout:
     """
     系统登陆登出
     """
-
+    @allure.title('登陆')
     @pytest.mark.parametrize("username,password,assert1,assert2", data['用户登陆数据'])
     def test_login(self, username, password, assert1, assert2):
         """
@@ -28,6 +29,7 @@ class TestLoginLogout:
         assert res.status_code == eval(DATA[0][4])
         assert res.json()['code'] == eval(DATA[0][5])
 
+    @allure.title('登出')
     def test_logout(self, test_login):
         """
         登出
